@@ -2,8 +2,12 @@ package com.czp.utils.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 
 import org.junit.Before;
 import org.junit.Test;
