@@ -63,26 +63,4 @@ public class ByteBitmap {
 		int bitIndex = num & 7;
 		map[arrIndex] |= (1 << bitIndex);
 	}
-
-	public static void main(String[] args) {
-		try {
-			MemoryMXBean mmBean = ManagementFactory.getMemoryMXBean();
-			RandomAccessFile rf = new RandomAccessFile("res.txt", "rw");
-			int max = 100000000;
-			MappedByteBuffer buffer = rf.getChannel().map(FileChannel.MapMode.PRIVATE, 0, max);
-			long t1 = System.currentTimeMillis();
-			for (int i = 0; i < max; i++) {
-				byte b = (byte) ((1 <<  i & 7));
-				buffer.put(b);
-			}
-			for (int i = 0; i < max; i++) {
-				buffer.get(i);
-			}
-			double t = (System.currentTimeMillis() - t1)/1000.0;
-			rf.close();
-			System.out.println(t+"-memory used(MB):" + (mmBean.getHeapMemoryUsage().getUsed()) / 1024 / 1024);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
