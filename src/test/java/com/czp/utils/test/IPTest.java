@@ -2,12 +2,8 @@ package com.czp.utils.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,16 +11,16 @@ import org.junit.Test;
 import com.czp.utils.ip.IpList;
 
 /**
- * Function:²âÊÔÀà
+ * Function:æµ‹è¯•ç±»
  *
- * @date:2016Äê9ÔÂ30ÈÕ/ÏÂÎç5:05:43
- * @Author:jeff@aoliday.cao
+ * @date:2016å¹´9æœˆ30æ—¥/ä¸‹åˆ9:55:20
+ * @Author:coder_czp@126.com
  * @version:1.0
  */
-public class IPUtilTest {
+public class IPTest {
 
 	MemoryMXBean mmBean = ManagementFactory.getMemoryMXBean();
-	IpList util = IpList.Impl.create(IpList.Impl.SUPPORT_IPV6_IMPL);
+	IpList util = IpList.Impl.create(IpList.Impl.IPV4_BITMAP_IMPL);
 
 	@Before
 	public void loadCfg() {
@@ -58,15 +54,4 @@ public class IPUtilTest {
 		System.out.println("memory used(MB):" + (mmBean.getHeapMemoryUsage().getUsed()) / 1024 / 1024);
 	}
 
-	@Test
-	public void performTest() {
-		long maxIp = 2 << 48;
-		long start = System.currentTimeMillis();
-		for (long i = 0; i < maxIp; i++) {
-			util.isNumIpInList(i);
-		}
-		long end = System.currentTimeMillis();
-		System.out.println("times(s):" + (end - start) / 1000.0);
-		System.out.println("memory used(MB):" + (mmBean.getHeapMemoryUsage().getUsed()) / 1024 / 1024);
-	}
 }

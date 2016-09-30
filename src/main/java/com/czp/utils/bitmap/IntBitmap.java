@@ -23,7 +23,7 @@ public class IntBitmap {
 	public IntBitmap(int maxValue) {
 		/** 一个Int有32位bit */
 		len = maxValue / 32;
-		len = (maxValue % 32 == 0) ? len : len++;
+		len = (maxValue % 32 == 0) ? len : len+1;
 		map = new int[len];
 		max = maxValue;
 	}

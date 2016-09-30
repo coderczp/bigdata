@@ -1,22 +1,16 @@
 package com.czp.utils.bitmap;
 
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 
 /**
- * Function:ÓÃbitÎ»±ê¼ÇÊı¾İ,ÎªÁËĞÔÄÜÒ»´ÎÉêÇë×ã¹»µÄÄÚ´æ<br>
- * ±ÜÃâbitset¶¯Ì¬À©Èİ,Ò»¸öbyte×Ö½Ú¹²8bitÎ»,¿ÉÒÔ±ê¼Ç 8<br>
- * ¸öÊı×Ö,ËùĞèÄÚ´æÎª:MaxNum/8±ê¼ÇÒ»¸öÊıµÄ²½Öè:<br>
- * 1.ÕÒµ½Õâ¸öÊıÔÚbitÊı×éÀïµÄË÷Òı:int index =num>>3(µÈÓÚnum/8)<br>
- * 2.ÕÒµ½Õâ¸öÊıÔÚnum[index]µÄbitÎ»: int bitIndex=num&7<br>
- * ¶ÔÓÚÒÆÎ»ÔËËã,num %8 = num&((1<<3)-1)==num&7<br>
- * 3.½«bitÎª±ê¼ÇÎª1: num[index]|=1<<num&7 <br>
+ * Function:ç”¨bitä½æ ‡è®°æ•°æ®,ä¸ºäº†æ€§èƒ½ä¸€æ¬¡ç”³è¯·è¶³å¤Ÿçš„å†…å­˜<br>
+ * é¿å…bitsetåŠ¨æ€æ‰©å®¹,ä¸€ä¸ªbyteå­—èŠ‚å…±8bitä½,å¯ä»¥æ ‡è®° 8<br>
+ * ä¸ªæ•°å­—,æ‰€éœ€å†…å­˜ä¸º:MaxNum/8æ ‡è®°ä¸€ä¸ªæ•°çš„æ­¥éª¤:<br>
+ * 1.æ‰¾åˆ°è¿™ä¸ªæ•°åœ¨bitæ•°ç»„é‡Œçš„ç´¢å¼•:int index =num>>3(ç­‰äºnum/8)<br>
+ * 2.æ‰¾åˆ°è¿™ä¸ªæ•°åœ¨num[index]çš„bitä½: int bitIndex=num&7<br>
+ * å¯¹äºç§»ä½è¿ç®—,num %8 = num&((1<<3)-1)==num&7<br>
+ * 3.å°†bitä¸ºæ ‡è®°ä¸º1: num[index]|=1<<num&7 <br>
  * 
- * @date:2016Äê9ÔÂ25ÈÕ/ÏÂÎç3:07:51
+ * @date:2016å¹´9æœˆ25æ—¥/ä¸‹åˆ3:07:51
  * @Author:coder_czp@126.com
  * @version:1.0
  */
@@ -29,15 +23,15 @@ public class ByteBitmap {
 	private int max;
 
 	public ByteBitmap(int maxValue) {
-		/** Ò»¸öbyte8¸öbit */
+		/** ä¸€ä¸ªbyte8ä¸ªbit */
 		len = maxValue / 8;
-		len = (maxValue % 8 == 0) ? len : len++;
+		len = (maxValue % 8 == 0) ? len : len+1;
 		map = new byte[len];
 		max = maxValue;
 	}
 
 	/**
-	 * ÅĞ¶ÏÄ³¸öÊı×ÖÊÇ·ñ±ê¼ÇÎª1
+	 * åˆ¤æ–­æŸä¸ªæ•°å­—æ˜¯å¦æ ‡è®°ä¸º1
 	 * 
 	 * @param num
 	 * @return
@@ -51,7 +45,7 @@ public class ByteBitmap {
 	}
 
 	/***
-	 * ÉèÖÃ±êÖ¾Î»Îª1
+	 * è®¾ç½®æ ‡å¿—ä½ä¸º1
 	 * 
 	 * @param num
 	 */

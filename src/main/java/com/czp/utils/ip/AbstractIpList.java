@@ -5,31 +5,31 @@ import java.io.FileReader;
 import java.math.BigInteger;
 
 /**
- * Function:¸ºÔğ¼ÓÔØÅäÖÃÊı¾İ,ip¼äÓÃ¶ººÅ·Ö¸ô
+ * Function:è´Ÿè´£åŠ è½½é…ç½®æ•°æ®,ipé—´ç”¨é€—å·åˆ†éš”
  * 
- * @date:2016Äê9ÔÂ30ÈÕ/ÏÂÎç5:15:15
+ * @date:2016å¹´9æœˆ30æ—¥/ä¸‹åˆ5:15:15
  * @Author:jeff@aoliday.cao
  * @version:1.0
  */
 public abstract class AbstractIpList implements IpList {
 
-	// ipv6³¤¶È
+	// ipv6é•¿åº¦
 	public static final int IPV6_MAX_LEN = "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff".length();
 
-	// ipv4³¤¶È ×î¶àÎª:223.255.255.255
+	// ipv4é•¿åº¦ æœ€å¤šä¸º:223.255.255.255
 	public static final int IPV4_MAX_LEN = "223.255.255.255".length();
 
-	// ipv4 ³¤¶È×îÉÙÎª:0.0.0.0
+	// ipv4 é•¿åº¦æœ€å°‘ä¸º:0.0.0.0
 	public static final int IPV4_MIN_LEN = "0.0.0.0".length();
 
 	/**
-	 * ipv6µØÖ·×ªÓĞbyte[]
+	 * ipv6åœ°å€è½¬æœ‰byte[]
 	 */
 	public static byte[] ipv6ToBytes(String ipv6) {
 		byte[] ret = new byte[17];
 		ret[0] = 0;
 		int ib = 16;
-		boolean comFlag = false;// ipv4»ìºÏÄ£Ê½±ê¼Ç
+		boolean comFlag = false;// ipv4æ··åˆæ¨¡å¼æ ‡è®°
 		if (ipv6.startsWith(":"))
 			ipv6 = ipv6.substring(1);
 		String groups[] = ipv6.split(":");
@@ -57,7 +57,7 @@ public abstract class AbstractIpList implements IpList {
 	}
 
 	/**
-	 * ipv4 ×ªbyte[]
+	 * ipv4 è½¬byte[]
 	 */
 	protected static byte[] ipv4ToBytes(String ipv4) {
 		byte[] arr = new byte[5];
@@ -73,7 +73,7 @@ public abstract class AbstractIpList implements IpList {
 	}
 
 	/***
-	 * ½«stringÀàĞÍµÄIP×ª»¯Îªlong
+	 * å°†stringç±»å‹çš„IPè½¬åŒ–ä¸ºlong
 	 * 
 	 * @param strIp
 	 * @return
@@ -89,7 +89,7 @@ public abstract class AbstractIpList implements IpList {
 	}
 
 	/***
-	 * ½«stringÀàĞÍµÄIP×ª»¯Îªint
+	 * å°†stringç±»å‹çš„IPè½¬åŒ–ä¸ºint
 	 * 
 	 * @param strIp
 	 * @return
@@ -119,7 +119,7 @@ public abstract class AbstractIpList implements IpList {
 	}
 
 	/**
-	 * ´¦Àí¶ÁÈ¡µ½µÄIP
+	 * å¤„ç†è¯»å–åˆ°çš„IP
 	 * 
 	 * @param ip
 	 */

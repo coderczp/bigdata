@@ -1,16 +1,16 @@
 package com.czp.utils.ip;
 
 /**
- * Function:IPºÚ°×Ãûµ¥½Ó¿Ú
+ * Function:IPé»‘ç™½åå•æ¥å£
  *
- * @date:2016Äê9ÔÂ26ÈÕ/ÉÏÎç9:34:34
+ * @date:2016å¹´9æœˆ26æ—¥/ä¸Šåˆ9:34:34
  * @Author:jeff@aoliday.cao
  * @version:1.0
  */
 public interface IpList {
 
 	/**
-	 * ²âÊÔIPÊÇ·ñÔÊĞí
+	 * æµ‹è¯•IPæ˜¯å¦å…è®¸
 	 * 
 	 * @param ip
 	 * @return
@@ -18,15 +18,15 @@ public interface IpList {
 	boolean isInList(String ip);
 
 	/**
-	 * ²âÊÔIPÊÇ·ñÔÊĞí
+	 * æµ‹è¯•IPæ˜¯å¦å…è®¸
 	 * 
 	 * @param ip
 	 * @return
 	 */
-	boolean isNumIpInList(long ip);
+	boolean isNumIpInList(int ip);
 
 	/***
-	 * ¼ÓÔØÅäÖÃÎÄ¼ş
+	 * åŠ è½½é…ç½®æ–‡ä»¶
 	 * 
 	 * @param configPath
 	 */
@@ -34,17 +34,23 @@ public interface IpList {
 
 	enum Impl {
 		/***
-		 * bitSetÊµÏÖ°æ±¾ Ö§³ÖIPv4
+		 * bitSetå®ç°ç‰ˆæœ¬ æ”¯æŒIPv4
 		 */
 		IPV4_BITSET_IMPL,
 		/***
-		 * bitmapÊµÏÖ°æ±¾Ö§³ÖIPv4ĞÔÄÜ±ÈIPV4_BITSET_IMPL¸üºÃ
+		 * bitmapå®ç°ç‰ˆæœ¬æ”¯æŒIPv4æ€§èƒ½æ¯”IPV4_BITSET_IMPLæ›´å¥½
 		 */
 		IPV4_BITMAP_IMPL,
+
 		/***
-		 * bitSetÊµÏÖ°æ±¾,Ö§³Öipv6
+		 * å†…å­˜æ˜ å°„ç‰ˆæœ¬
 		 */
-		SUPPORT_IPV6_IMPL;
+		IPV4_MMAP_IMPL,
+
+		/***
+		 * HashMapå®ç°ç‰ˆæœ¬,æœ€ç®€å•çš„ç‰ˆæœ¬,ä½†æ˜¯å†…å­˜æ¶ˆè€—è¿‡é«˜
+		 */
+		HASH_MAP_IMPL;
 
 		public static IpList create(Impl type) {
 			switch (type) {
@@ -52,8 +58,10 @@ public interface IpList {
 				return new Ipv4BitsetImpl();
 			case IPV4_BITMAP_IMPL:
 				return new Ipv4BitmapImpl();
-			case SUPPORT_IPV6_IMPL:
-				return new Ipv4v6ListImpl();
+			case HASH_MAP_IMPL:
+				return new Ipv4HashmapImpl();
+			case IPV4_MMAP_IMPL:
+				return new Ipv4MMapImpl();
 			default:
 				throw new IllegalArgumentException("unknown type:" + type);
 			}
