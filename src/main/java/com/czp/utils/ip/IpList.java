@@ -32,7 +32,7 @@ public interface IpList {
 	 */
 	void loadConfig(String configPath);
 
-	enum Impl {
+	enum Factory {
 		/***
 		 * bitSet实现版本 支持IPv4
 		 */
@@ -52,7 +52,7 @@ public interface IpList {
 		 */
 		HASH_MAP_IMPL;
 
-		public static IpList create(Impl type) {
+		public static IpList create(Factory type) {
 			switch (type) {
 			case IPV4_BITSET_IMPL:
 				return new Ipv4BitsetImpl();

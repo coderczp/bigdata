@@ -80,6 +80,7 @@ public class MMapBitmap {
 
 			@Override
 			public void run() {
+				//System.out.println("release mmap");
 				release();
 			}
 		}));

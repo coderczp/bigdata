@@ -20,14 +20,28 @@ public class IPPerformTest {
 
 	@Test
 	public void mmapImplPerformTest() {
-		IpList util = IpList.Impl.create(IpList.Impl.IPV4_MMAP_IMPL);
+		doTest(IpList.Factory.create(IpList.Factory.IPV4_MMAP_IMPL));
+	}
+
+	@Test
+	public void bitmapImplPerformTest() {
+		doTest(IpList.Factory.create(IpList.Factory.IPV4_BITMAP_IMPL));
+	}
+
+	@Test
+	public void bitsetImplPerformTest() {
+		doTest(IpList.Factory.create(IpList.Factory.IPV4_BITSET_IMPL));
+	}
+
+	private void doTest(IpList util) {
 		util.loadConfig("./white_ip.txt");
 		long start = System.currentTimeMillis();
 		for (int i = 0; i < Integer.MAX_VALUE; i++) {
 			util.isNumIpInList(i);
 		}
 		long end = System.currentTimeMillis();
-		System.out.println("times(s):" + (end - start) / 1000.0);
-		System.out.println("memory used(MB):" + (mmBean.getHeapMemoryUsage().getUsed()) / 1024 / 1024);
+		double times = (end - start) / 1000.0;
+		long mm = (mmBean.getHeapMemoryUsage().getUsed()) / 1024 / 1024;
+		System.out.println(String.format("time:%ss memory:%sMB Impl:%s", times,mm,util));
 	}
 }

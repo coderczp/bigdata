@@ -20,7 +20,7 @@ import com.czp.utils.ip.IpList;
 public class IPTest {
 
 	MemoryMXBean mmBean = ManagementFactory.getMemoryMXBean();
-	IpList util = IpList.Impl.create(IpList.Impl.IPV4_BITMAP_IMPL);
+	IpList util = IpList.Factory.create(IpList.Factory.IPV4_BITMAP_IMPL);
 
 	@Before
 	public void loadCfg() {
